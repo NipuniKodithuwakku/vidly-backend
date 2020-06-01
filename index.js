@@ -15,11 +15,21 @@ app.get("/api/genres", (req, res) => {
 });
 
 //post request
+// app.post("/api/genres", (req, res) => {
+//   const { error } = validateGenre(req.body);
+//   if (error) res.status(400).send(error.details[0].message);
+//   return;
+//   const genre = {
+//     id: genres.length + 1,
+//     name: req.body.name,
+//   };
+//   genres.push(genre);
+//   res.send(genre);
+// });
 app.post("/api/genres", (req, res) => {
-  if (!req.body.name || req.body.name.length < 3) {
-    res.status(400).send("Name is required and should be minimum 3 characters");
-  }
-  return;
+  const { error } = validateGenre(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
   const genre = {
     id: genres.length + 1,
     name: req.body.name,
@@ -55,7 +65,7 @@ app.delete("/api/genres/:id", (req, res) => {
 
 function validateGenre(genre) {
   const schema = {
-    name: Joi.String().min(3).required(),
+    name: Joi.string().min(3).required(),
   };
   return Joi.validate(genre.schema);
 }
