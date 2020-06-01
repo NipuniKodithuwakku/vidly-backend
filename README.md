@@ -7,3 +7,5 @@ building backend services for Vidly application (service that renting out movies
 <p>Above command creates the <b>package.json</b> file.By executing <b> npm init --yes</b> you can create package.json file within one step without answering any question.</p>
 <h2>👉🏼install express</h2>
 <p>express is a fast and light weight framework for building web applications.To install <b>express</b> run <b>npm i express</b> on your terminal.After the installing it will display on dependencies section of package.json file.</p>
+<h2>👉🏼install joi</h2>
+<p>run <b>npm i joi</b> on your terminal to install Joi.Joi helps you to validate inputs.</p>
