@@ -10,7 +10,7 @@ const genres = [
 ];
 //get request
 
-app.get("/", (req, res) => {
+app.get("/api/genres", (req, res) => {
   res.send(genres);
 });
 
@@ -33,7 +33,7 @@ app.put("/api/genres/:id", (req, res) => {
   const genre = genres.find((c) => c.id === parseInt(req.params.id));
   if (!genre) res.status(404).send("The genre with the given id was not found");
 
-  const result = validateGenre(req.body);
+  // const result = validateGenre(req.body);
   const { error } = validateGenre(req.body);
   if (error) {
     res.status(400).send(error.details[0].message);
@@ -44,6 +44,14 @@ app.put("/api/genres/:id", (req, res) => {
 });
 
 //delete request
+app.delete("/api/genres/:id", (req, res) => {
+  const genre = genres.find((c) => c.id === parseInt(req.params.id));
+  if (!genre)
+    res.status(404).send("The genre with the given Id was not found.");
+  const index = genres.indexOf(genre);
+  genres.splice(index, 1);
+  res.send(genre);
+});
 
 function validateGenre(genre) {
   const schema = {
